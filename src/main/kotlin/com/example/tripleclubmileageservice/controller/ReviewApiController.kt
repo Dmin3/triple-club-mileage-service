@@ -19,7 +19,7 @@ class ReviewApiController(
     private val reviewService: ReviewService
 ) {
     @PostMapping
-    fun reviewEvents(@Valid @RequestBody reviewRequest: ReviewRequest): ResponseEntity<ReviewResponse> {
+    fun reviewEvents(@Valid @RequestBody reviewRequest: ReviewRequest): ResponseEntity<Any> {
         if (reviewRequest.type != EventType.REVIEW) throw NotMatchException("${reviewRequest.type} NotMatchField ${EventType.REVIEW.name}")
 
         when (reviewRequest.action) {

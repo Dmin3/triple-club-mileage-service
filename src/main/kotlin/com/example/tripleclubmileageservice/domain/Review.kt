@@ -31,6 +31,11 @@ class Review(
         photo.review = this
     }
 
+    fun deletePhoto(photo: Photo) {
+        this.attachedPhotos.remove(photo)
+        photo.review = this
+    }
+
     fun result() : ReviewResponse {
         return ReviewResponse(
             reviewId = this.id,
@@ -56,6 +61,8 @@ class Review(
     override fun hashCode(): Int {
         return id.hashCode()
     }
+
+
 }
 
 fun forCreateReview(reviewRequest: ReviewRequest) : Review{

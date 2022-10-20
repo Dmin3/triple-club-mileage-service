@@ -13,6 +13,9 @@ class UserPoint(
 
     var point: Int = 0,
 
+    var usePoint : Int = 0,
+
+    var accumulativePoint : Int = 0
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -33,6 +36,7 @@ class UserPoint(
 fun forCreateUserPoint(point: Int, userId: UUID) : UserPoint{
     return UserPoint(
         userId = userId,
-        point = point
+        point = point,
+        accumulativePoint = point
     )
 }
