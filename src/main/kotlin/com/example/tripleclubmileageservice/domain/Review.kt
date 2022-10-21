@@ -9,11 +9,13 @@ import javax.persistence.*
 @Entity
 class Review(
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID(),
+    @Column(name = "review_id" ,columnDefinition = "BINARY(16)")
+    val id: UUID,
 
+    @Column(columnDefinition = "BINARY(16)")
     val userId: UUID,
 
+    @Column(columnDefinition = "BINARY(16)")
     val placeId: UUID,
 
     var content: String? = null,
@@ -34,6 +36,11 @@ class Review(
     fun deletePhoto(photo: Photo) {
         this.attachedPhotos.remove(photo)
         photo.review = this
+    }
+
+    fun update(reviewRequest: ReviewRequest) {
+        this.content = reviewRequest.content
+        this.updatedAt = LocalDateTime.now()
     }
 
     fun result() : ReviewResponse {
@@ -61,12 +68,11 @@ class Review(
     override fun hashCode(): Int {
         return id.hashCode()
     }
-
-
 }
 
 fun forCreateReview(reviewRequest: ReviewRequest) : Review{
     return Review(
+        id = reviewRequest.reviewId,
         userId = reviewRequest.userId,
         placeId = reviewRequest.placeId,
         content = reviewRequest.content

@@ -57,8 +57,6 @@ class ReviewServiceImpl(
             }
         }
 
-        val saveReview = reviewRepository.save(review)
-
         if (point > 0) {
             val findUserPoint = userPointRepository.findById(reviewRequest.userId)
 
@@ -67,11 +65,13 @@ class ReviewServiceImpl(
                 userPoint.point += point
                 userPoint.accumulativePoint += point
             } else {
-                userPointRepository.save(forCreateUserPoint(point, saveReview.userId))
+                userPointRepository.save(forCreateUserPoint(point, reviewRequest.userId))
             }
 
             userPointHistoryRepository.save(forCreatePointHistory(review, point, UserPointType.EARN))
         }
+
+        val saveReview = reviewRepository.save(review)
 
         return saveReview.result()
     }
@@ -102,6 +102,8 @@ class ReviewServiceImpl(
             review.addPhoto(forCreatePhoto(photoId))
         }
 
+        review.update(reviewRequest)
+
         // 사진 삭제시 포인트 -1 감소
         if (review.attachedPhotos.isEmpty()) {
             point -= 1
@@ -126,7 +128,7 @@ class ReviewServiceImpl(
         val review = findReview(reviewRequest.reviewId)
         val userPoint = findUserPoint(reviewRequest.userId)
 
-        val pointHistories = userPointHistoryRepository.findByReviewIdAndUserId(review.id, userPoint.userId)
+        val pointHistories = userPointHistoryRepository.findByReviewIdAndUserId(review.id, userPoint.id)
 
         val sumOf = pointHistories.sumOf { it.changePoint }
 

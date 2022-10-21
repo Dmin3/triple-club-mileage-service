@@ -7,10 +7,10 @@ import javax.persistence.*
 @Entity
 class Photo(
     @Id
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(name = "photo_id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "review_id")
     var review: Review? = null,
 

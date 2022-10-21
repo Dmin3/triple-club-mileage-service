@@ -1,5 +1,7 @@
 package com.example.tripleclubmileageservice.domain
 
+import com.example.tripleclubmileageservice.data.UserPointHistoryResponse
+import com.example.tripleclubmileageservice.data.UserPointResponse
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
@@ -15,17 +17,30 @@ class UserPointHistory(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
+    @Column(columnDefinition = "BINARY(16)")
     val userId: UUID,
 
+    @Column(columnDefinition = "BINARY(16)")
     val reviewId: UUID,
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     val userPointType: UserPointType,
 
     val changePoint: Int,
 
     val createdAt: LocalDateTime = LocalDateTime.now()
 ){
+    fun result() : UserPointHistoryResponse{
+        return UserPointHistoryResponse(
+            id = this.id,
+            userId = this.userId,
+            reviewId = this.reviewId,
+            userPointType = this.userPointType,
+            changePoint = this.changePoint,
+            createdAt = this.createdAt
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
