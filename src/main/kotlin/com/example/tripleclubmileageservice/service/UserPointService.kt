@@ -1,9 +1,10 @@
 package com.example.tripleclubmileageservice.service
 
+import com.example.tripleclubmileageservice.common.advice.exception.NotFoundException
 import com.example.tripleclubmileageservice.common.data.Paginated
-import com.example.tripleclubmileageservice.common.exception.NotFoundException
 import com.example.tripleclubmileageservice.data.UserPointHistoryResponse
 import com.example.tripleclubmileageservice.data.UserPointResponse
+import com.example.tripleclubmileageservice.domain.UserPoint
 import com.example.tripleclubmileageservice.repository.UserPointHistoryRepository
 import com.example.tripleclubmileageservice.repository.UserPointRepository
 import org.springframework.data.domain.Pageable
@@ -23,15 +24,16 @@ class UserPointServiceImpl(
     private val userPointHistoryRepository: UserPointHistoryRepository
 ) : UserPointService {
     override fun get(userId: UUID): UserPointResponse {
-        val findUserPoint = userPointRepository.findById(userId)
-        if (findUserPoint.isEmpty) throw NotFoundException("not found : $userId")
+        val userPoint = findUserPoint(userId)
 
-        return findUserPoint.get().result()
+        return userPoint.result()
     }
 
     override fun getUserByHistories(userId: UUID, pageable: Pageable): Paginated<UserPointHistoryResponse> {
-        val userHistories = userPointHistoryRepository.findAllByUserId(userId, pageable)
+        val userPoint = findUserPoint(userId)
+        val userHistories = userPointHistoryRepository.findAllByUserId(userPoint.id, pageable)
         val list = userHistories.map { it.result() }.toList()
+
         return Paginated(list, userHistories)
     }
 
@@ -39,5 +41,10 @@ class UserPointServiceImpl(
         val histories = userPointHistoryRepository.findAll(pageable)
         val list = histories.map { it.result() }.toList()
         return Paginated(list, histories)
+    }
+
+    private fun findUserPoint(userId: UUID): UserPoint {
+        val findUserPoint = userPointRepository.findById(userId)
+        return if (findUserPoint.isEmpty) throw NotFoundException("not found userId: $userId") else findUserPoint.get()
     }
 }

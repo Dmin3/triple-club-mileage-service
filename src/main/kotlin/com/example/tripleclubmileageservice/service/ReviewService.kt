@@ -1,7 +1,7 @@
 package com.example.tripleclubmileageservice.service
 
-import com.example.tripleclubmileageservice.common.exception.NotFoundException
-import com.example.tripleclubmileageservice.common.exception.ReviewAlreadyExistException
+import com.example.tripleclubmileageservice.common.advice.exception.NotFoundException
+import com.example.tripleclubmileageservice.common.advice.exception.ReviewAlreadyExistException
 import com.example.tripleclubmileageservice.data.ReviewRequest
 import com.example.tripleclubmileageservice.data.ReviewResponse
 import com.example.tripleclubmileageservice.domain.*
@@ -37,19 +37,19 @@ class ReviewServiceImpl(
 
         // 장소에 대한 리뷰가 하나도 없다면 보너스 포인트 추가
         if (!reviewRepository.existsByPlaceId(reviewRequest.placeId)){
-            point += 1
+            point += addPoint()
         }
 
         // 텍스트 작성 시 포인트 추가
         if (reviewRequest.content.isNotBlank()){
-            point += 1
+            point += addPoint()
         }
 
         val review = forCreateReview(reviewRequest)
 
         // Photo Id가 존재하지 않다면 루프를 돌지 않고, 존재한다면 포인트 +1 증가
         if (reviewRequest.attachedPhotoIds.isNotEmpty()) {
-            point += 1
+            point += addPoint()
 
             reviewRequest.attachedPhotoIds.forEach { photoId ->
                 val createPhoto = forCreatePhoto(photoId)
@@ -62,13 +62,14 @@ class ReviewServiceImpl(
 
             if (findUserPoint.isPresent) {
                 val userPoint = findUserPoint.get()
-                userPoint.point += point
-                userPoint.accumulativePoint += point
+                userPoint.point += getPoint(point)
+                userPoint.accumulativePoint += getPoint(point)
             } else {
-                userPointRepository.save(forCreateUserPoint(point, reviewRequest.userId))
+                val userPoint = forCreateUserPoint(getPoint(point), reviewRequest.userId)
+                userPointRepository.save(userPoint)
             }
 
-            userPointHistoryRepository.save(forCreatePointHistory(review, point, UserPointType.EARN))
+            userPointHistoryRepository.save(forCreatePointHistory(review, getPoint(point), UserPointType.EARN))
         }
 
         val saveReview = reviewRepository.save(review)
@@ -84,7 +85,7 @@ class ReviewServiceImpl(
 
         // 리뷰사진이 없고 DTO에 사진이 있다면 포인트 +1 증가
         if (reviewRequest.attachedPhotoIds.isNotEmpty() && review.attachedPhotos.isEmpty()) {
-            point += 1
+            point += addPoint()
         }
 
         // 삭제할 사진 Id 와 추가할 사진 Id
@@ -106,17 +107,17 @@ class ReviewServiceImpl(
 
         // 사진 삭제시 포인트 -1 감소
         if (review.attachedPhotos.isEmpty()) {
-            point -= 1
+            point -= removePoint()
         }
 
         if (point > 0) {
-            userPoint.point += point
-            userPoint.accumulativePoint += point
-            userPointHistoryRepository.save(forCreatePointHistory(review, point, UserPointType.EARN))
+            userPoint.point += getPoint(point)
+            userPoint.accumulativePoint += getPoint(point)
+            userPointHistoryRepository.save(forCreatePointHistory(review, getPoint(point), UserPointType.EARN))
         } else if (point < 0) {
-            userPoint.point += point
-            userPoint.accumulativePoint += point
-            userPointHistoryRepository.save(forCreatePointHistory(review, point, UserPointType.WITHDRAW))
+            userPoint.point += getPoint(point)
+            userPoint.accumulativePoint += getPoint(point)
+            userPointHistoryRepository.save(forCreatePointHistory(review, getPoint(point), UserPointType.WITHDRAW))
         }
 
         val savedReview = reviewRepository.save(review)
@@ -130,11 +131,12 @@ class ReviewServiceImpl(
 
         val pointHistories = userPointHistoryRepository.findByReviewIdAndUserId(review.id, userPoint.id)
 
-        val sumOf = pointHistories.sumOf { it.changePoint }
+        val sum = getUserPointHistories(pointHistories)
 
-        userPoint.point -= sumOf
+        userPoint.point -= sum
 
         userPointRepository.save(userPoint)
+        userPointHistoryRepository.save(forCreatePointHistory(review, sum, UserPointType.WITHDRAW))
 
         reviewRepository.delete(review)
     }
@@ -147,6 +149,18 @@ class ReviewServiceImpl(
     private fun findUserPoint(userId: UUID): UserPoint {
         val findUserPoint = userPointRepository.findById(userId)
         return if (findUserPoint.isEmpty) throw NotFoundException("not found : $userId") else findUserPoint.get()
+    }
+
+    internal fun getUserPointHistories(pointHistories: List<UserPointHistory>): Int {
+        return pointHistories.sumOf { it.changePoint }
+    }
+
+    internal fun addPoint() = 1
+
+    internal fun removePoint() = 1
+
+    internal fun getPoint(point: Int): Int {
+        return point
     }
 }
 

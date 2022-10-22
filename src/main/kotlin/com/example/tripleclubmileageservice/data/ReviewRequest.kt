@@ -1,6 +1,7 @@
 package com.example.tripleclubmileageservice.data
 
 import java.util.*
+import javax.validation.constraints.Size
 
 data class ReviewRequest(
     val type : EventType,

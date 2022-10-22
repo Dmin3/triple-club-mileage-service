@@ -1,10 +1,9 @@
 package com.example.tripleclubmileageservice.controller
 
-import com.example.tripleclubmileageservice.common.exception.NotMatchException
+import com.example.tripleclubmileageservice.common.advice.exception.NotMatchException
 import com.example.tripleclubmileageservice.data.EventType
 import com.example.tripleclubmileageservice.data.ReviewAction
 import com.example.tripleclubmileageservice.data.ReviewRequest
-import com.example.tripleclubmileageservice.data.ReviewResponse
 import com.example.tripleclubmileageservice.service.ReviewService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -20,19 +19,16 @@ class ReviewApiController(
 ) {
     @PostMapping
     fun reviewEvents(@Valid @RequestBody reviewRequest: ReviewRequest): ResponseEntity<Any> {
-        if (reviewRequest.type != EventType.REVIEW) throw NotMatchException("${reviewRequest.type} NotMatchField ${EventType.REVIEW.name}")
-
-        when (reviewRequest.action) {
+        return when (reviewRequest.action) {
             ReviewAction.ADD -> {
-                return ResponseEntity.ok(reviewService.create(reviewRequest))
+                ResponseEntity.ok(reviewService.create(reviewRequest))
             }
             ReviewAction.MOD -> {
-                return ResponseEntity.ok(reviewService.update(reviewRequest))
+                ResponseEntity.ok(reviewService.update(reviewRequest))
             }
             ReviewAction.DELETE -> {
-                return ResponseEntity.ok(reviewService.delete(reviewRequest))
+                ResponseEntity.ok(reviewService.delete(reviewRequest))
             }
-            else -> throw NotMatchException("NotMatchField = ${reviewRequest.action}")
         }
     }
 }
