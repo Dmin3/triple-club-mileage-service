@@ -38,6 +38,8 @@ dependencies {
 
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	testImplementation("io.mockk:mockk:1.12.2")
 	testImplementation("org.amshove.kluent:kluent:1.68")
@@ -54,28 +56,50 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-val snippetsDir by extra { file("build/generated-snippets") }
+tasks {
+	val snippetsDir = file("$buildDir/generated-snippets")
 
-tasks.test {
-	outputs.dir(snippetsDir)
-}
-
-tasks.asciidoctor {
-	inProcess = org.asciidoctor.gradle.base.process.ProcessMode.JAVA_EXEC
-	forkOptions {
-		jvmArgs("--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.io=ALL-UNNAMED")
+	clean {
+		delete("src/main/resources/static/docs")
 	}
-	inputs.dir(snippetsDir)
-	dependsOn(tasks.test)
-}
 
-tasks.bootJar {
-	dependsOn(tasks.asciidoctor)
-	from("$snippetsDir/html5") {
-		into("static/docs")
+	test {
+		useJUnitPlatform()
+		systemProperty("org.springframework.restdocs.outputDir", snippetsDir)
+		outputs.dir(snippetsDir)
 	}
-}
 
-tasks.bootJar {
-	archiveFileName.set("triple-club-mileage-service.jar")
+	build {
+		dependsOn("copyDocument")
+	}
+
+	asciidoctor {
+		dependsOn(test)
+
+		attributes(
+			mapOf("snippets" to snippetsDir)
+		)
+		inputs.dir(snippetsDir)
+
+		doFirst {
+			delete("src/main/resources/static/docs")
+		}
+	}
+
+	register<Copy>("copyDocument") {
+		dependsOn(asciidoctor)
+
+		destinationDir = file(".")
+		from(asciidoctor.get().outputDir) {
+			into("src/main/resources/static/docs")
+		}
+	}
+
+	bootJar {
+		dependsOn(asciidoctor)
+
+		from(asciidoctor.get().outputDir) {
+			into("BOOT-INF/classes/static/docs")
+		}
+	}
 }

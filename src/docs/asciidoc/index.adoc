@@ -1,0 +1,38 @@
+
+= *Triple-Club-Mileage-Service-API*
+:toc: left
+
+== API 문서
+- 개발 : http://localhost:8080/index.html
+
+== 리뷰
+=== `리뷰 이벤트`
+
+include::{snippets}/post-review-event/http-request.adoc[]
+include::{snippets}/post-review-event/request-body.adoc[]
+include::{snippets}/post-review-event/request-fields.adoc[]
+include::{snippets}/post-review-event/response-body.adoc[]
+include::{snippets}/post-review-event/response-fields.adoc
+
+== 포인트 조회
+=== `유저 포인트 조회`
+include::{snippets}/get-user-points/http-request.adoc[]
+include::{snippets}/get-user-points/path-parameters.adoc
+include::{snippets}/get-user-points/response-body.adoc[]
+include::{snippets}/get-user-points/response-fields.adoc[]
+
+=== `유저 포인트 이력 조회`
+operation::get-user-histories-points[snippets='http-request,request-parameters,path-parameters,response-body,response-fields']
+include::{snippets}/get-user-histories-points/http-request.adoc[]
+include::{snippets}/get-user-histories-points/request-parameters.adoc[]
+include::{snippets}/get-user-histories-points/path-parameters.adoc[]
+include::{snippets}/get-user-histories-points/response-body.adoc[]
+include::{snippets}/get-user-histories-points/response-fields.adoc[]
+
+=== `전체 포인트 이력 조회`
+include::{snippets}/get-all-histories-points/http-request.adoc[]
+include::{snippets}/get-all-histories-points/request-parameters.adoc[]
+include::{snippets}/get-all-histories-points/response-body.adoc[]
+include::{snippets}/get-all-histories-points/response-fields.adoc[]
+
+

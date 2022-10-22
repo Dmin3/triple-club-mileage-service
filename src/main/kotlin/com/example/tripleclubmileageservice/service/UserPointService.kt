@@ -7,6 +7,7 @@ import com.example.tripleclubmileageservice.data.UserPointResponse
 import com.example.tripleclubmileageservice.domain.UserPoint
 import com.example.tripleclubmileageservice.repository.UserPointHistoryRepository
 import com.example.tripleclubmileageservice.repository.UserPointRepository
+import org.springframework.context.annotation.Profile
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
@@ -19,6 +20,7 @@ interface UserPointService{
 }
 
 @Service
+@Profile("!test")
 class UserPointServiceImpl(
     private val userPointRepository: UserPointRepository,
     private val userPointHistoryRepository: UserPointHistoryRepository

@@ -1,7 +1,5 @@
 package com.example.tripleclubmileageservice.controller
 
-import com.example.tripleclubmileageservice.common.advice.exception.NotMatchException
-import com.example.tripleclubmileageservice.data.EventType
 import com.example.tripleclubmileageservice.data.ReviewAction
 import com.example.tripleclubmileageservice.data.ReviewRequest
 import com.example.tripleclubmileageservice.service.ReviewService

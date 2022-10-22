@@ -9,6 +9,7 @@ import com.example.tripleclubmileageservice.repository.PhotoRepository
 import com.example.tripleclubmileageservice.repository.ReviewRepository
 import com.example.tripleclubmileageservice.repository.UserPointHistoryRepository
 import com.example.tripleclubmileageservice.repository.UserPointRepository
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -20,6 +21,7 @@ interface ReviewService {
 }
 
 @Service
+@Profile("!test")
 @Transactional
 class ReviewServiceImpl(
     private val reviewRepository: ReviewRepository,
