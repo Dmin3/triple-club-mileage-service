@@ -1,0 +1,19 @@
+version: "3.8"
+
+volumes:
+  db:
+
+services:
+  localhost:
+    container_name: mysql
+    image: mysql/mysql-server:5.7
+    platform: linux/amd64
+    environment:
+      - MYSQL_DATABASE=triple
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql

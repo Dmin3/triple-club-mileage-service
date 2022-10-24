@@ -2,6 +2,7 @@ package com.example.tripleclubmileageservice.domain
 
 import com.example.tripleclubmileageservice.data.ReviewRequest
 import com.example.tripleclubmileageservice.data.ReviewResponse
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
@@ -9,13 +10,13 @@ import javax.persistence.*
 @Entity
 class Review(
     @Id
-    @Column(name = "review_id" ,columnDefinition = "BINARY(16)")
+    @Column(name = "review_id" ,columnDefinition = "VARBINARY(16)")
     val id: UUID,
 
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "VARBINARY(16)")
     val userId: UUID,
 
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "VARBINARY(16)")
     val placeId: UUID,
 
     var content: String? = null,

@@ -7,32 +7,48 @@
 
 == 리뷰
 === `리뷰 이벤트`
-
+==== HTTP Request
 include::{snippets}/post-review-event/http-request.adoc[]
+====  Request Body
 include::{snippets}/post-review-event/request-body.adoc[]
+==== Request fields
 include::{snippets}/post-review-event/request-fields.adoc[]
+==== Response Body
 include::{snippets}/post-review-event/response-body.adoc[]
-include::{snippets}/post-review-event/response-fields.adoc
+==== Response fields
+include::{snippets}/post-review-event/response-fields.adoc[]
 
 == 포인트 조회
 === `유저 포인트 조회`
+==== HTTP Request
 include::{snippets}/get-user-points/http-request.adoc[]
-include::{snippets}/get-user-points/path-parameters.adoc
+==== Path Parameters
+include::{snippets}/get-user-points/path-parameters.adoc[]
+==== Response Body
 include::{snippets}/get-user-points/response-body.adoc[]
+==== Response fields
 include::{snippets}/get-user-points/response-fields.adoc[]
 
 === `유저 포인트 이력 조회`
-operation::get-user-histories-points[snippets='http-request,request-parameters,path-parameters,response-body,response-fields']
+==== HTTP Request
 include::{snippets}/get-user-histories-points/http-request.adoc[]
+==== Request Parameters
 include::{snippets}/get-user-histories-points/request-parameters.adoc[]
+==== Path Parameters
 include::{snippets}/get-user-histories-points/path-parameters.adoc[]
+==== Response Body
 include::{snippets}/get-user-histories-points/response-body.adoc[]
+==== Response fields
 include::{snippets}/get-user-histories-points/response-fields.adoc[]
 
 === `전체 포인트 이력 조회`
+==== HTTP Request
 include::{snippets}/get-all-histories-points/http-request.adoc[]
+==== Request Parameters
 include::{snippets}/get-all-histories-points/request-parameters.adoc[]
+==== Response Body
 include::{snippets}/get-all-histories-points/response-body.adoc[]
+==== Response fields
 include::{snippets}/get-all-histories-points/response-fields.adoc[]
 
 

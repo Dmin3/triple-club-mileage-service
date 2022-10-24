@@ -2,6 +2,7 @@ package com.example.tripleclubmileageservice.domain
 
 import com.example.tripleclubmileageservice.data.UserPointHistoryResponse
 import com.example.tripleclubmileageservice.data.UserPointResponse
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
@@ -17,10 +18,10 @@ class UserPointHistory(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "VARBINARY(16)")
     val userId: UUID,
 
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "VARBINARY(16)")
     val reviewId: UUID,
 
     @Enumerated(EnumType.STRING)

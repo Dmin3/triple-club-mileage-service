@@ -1,5 +1,6 @@
 package com.example.tripleclubmileageservice.domain
 
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
@@ -7,7 +8,7 @@ import javax.persistence.*
 @Entity
 class Photo(
     @Id
-    @Column(name = "photo_id", columnDefinition = "BINARY(16)")
+    @Column(name = "photo_id", columnDefinition = "VARBINARY(16)")
     val id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice(basePackages = ["com.example.tripleclubmileageservice"])
 class ErrorHandlingController {
-
     @ExceptionHandler(NotFoundException::class)
     fun notFoundException(e: NotFoundException, http: HttpServletRequest): ResponseEntity<ErrorResponse> {
         val errorResponse = ErrorResponse().apply {

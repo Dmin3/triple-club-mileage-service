@@ -1,15 +1,17 @@
 package com.example.tripleclubmileageservice.domain
 
 import com.example.tripleclubmileageservice.data.UserPointResponse
+import org.hibernate.annotations.GenericGenerator
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
 class UserPoint(
     @Id
-    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+    @Column(name = "user_id", columnDefinition = "VARBINARY(16)")
     val id: UUID,
 
     var point: Int = 0,
