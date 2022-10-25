@@ -2,6 +2,8 @@
 ### 개요
 트리플 사용자들이 장소에 리뷰를 작성할 때 포인트를 부여하고, 전체/개인에 대한 포인트 부여 히스토리와 개인별 누적 포인트를 관리하고자 합니다.
 
+---
+
 ### 실행 방법
 1. mysql 컨테이너를 실행합니다 (3306포트를 사용하고 있는지 확인해주세요.)
 ```
@@ -31,6 +33,7 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 "placeId": "2e4baf1c-5acb-4efb-a1af-eddada31b00f"
 }
 ```
+---
 
 ### 사용 기술 스택
 - Kotlin 1.16.10
@@ -41,6 +44,8 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 - docker-compose
 - Spring REST Docs
 - mockk , kluent (Test 라이브러리)
+
+---
 
 ### ERD
 - [schema.sql 확인](https://github.com/Dmin3/triple-club-mileage-service/blob/master/src/main/resources/schema.sql)
