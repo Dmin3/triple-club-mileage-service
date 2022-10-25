@@ -79,7 +79,7 @@ internal class ReviewApiControllerTest {
                     requestFields(
                         fieldWithPath("type").description("이벤트 타입(${eventTypes})"),
                         fieldWithPath("action").description("리뷰 이벤트 타입(${reviewActions})"),
-                        fieldWithPath("reviewId").description("리뷰 아이디(리뷰 수정,삭제 시 필요").type(JsonFieldType.STRING).optional(),
+                        fieldWithPath("reviewId").description("리뷰 아이디(리뷰 수정,삭제 시 필요)").type(JsonFieldType.STRING).optional(),
                         fieldWithPath("content").description("리뷰 내용"),
                         fieldWithPath("attachedPhotoIds").description("리뷰에 첨부된 이미지 ID"),
                         fieldWithPath("userId").description("유저 아이디"),
