@@ -46,6 +46,10 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 - mockk , kluent (Test 라이브러리)
 
 ---
+### 프로젝트 구조
+- 프로젝트 구조 
+---
+
 
 ### ERD
 - [schema.sql 확인](https://github.com/Dmin3/triple-club-mileage-service/blob/master/src/main/resources/schema.sql)
