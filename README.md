@@ -83,7 +83,7 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 
 ![스크린샷 2022-10-25 오후 3 14 14](https://user-images.githubusercontent.com/80299170/197696355-facf71b4-3fd1-46f7-a3a5-b2f7aee191f5.png)
 
-### ❗️느낀점
+## ❗️느낀점
 처음부터 열까지 프로젝트를 생성하고 배포까지 다시 한번 배울 수 있어 좋았습니다!
 
 글로만 이해했던 내용들을 구현해보면서 다시 한번 상기시키며 배웠습니다!
