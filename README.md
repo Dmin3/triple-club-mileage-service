@@ -47,7 +47,7 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 
 ---
 ### 프로젝트 구조
-- 프로젝트 구조 
+- [프로젝트 구조] (https://github.com/Dmin3/triple-club-mileage-service/blob/master/project.md)
 ---
 
 
