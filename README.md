@@ -1,4 +1,4 @@
-# triple-club-mileage-service
+# ✈️ 트리플 클럽 마일리지 서비스
 ### 개요
 트리플 사용자들이 장소에 리뷰를 작성할 때 포인트를 부여하고, 전체/개인에 대한 포인트 부여 히스토리와 개인별 누적 포인트를 관리하고자 합니다.
 
@@ -65,9 +65,31 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 
 - 코틀린을 위한 Mock 프레임워크인 Mockk 프레임워크와 Assertion을 쉽게 도와주는 Kluent 라이브러리를 사용하여 테스트 코드를 작성하였습니다.
 
+---
+
+### EndPoint
+`POST http://localhost:8080/events`  리뷰 이벤트
+
+`GET http://localhost:8080/points/{userId}`   유저 현재 포인트 조회
+
+`GET http://localhost:8080/points/histories/{userId}`   유저 포인트 이력 조회
+
+`GET http://localhost:8080/points/{userId}`  전체 포인트 이력 조회
+
+---
+
 ### API 명세서
 - 프로젝트 실행 후 http://localhost:8080/docs/index.html 접속하여 명세서를 확인 할 수 있습니다.
 
 ![스크린샷 2022-10-25 오후 3 14 14](https://user-images.githubusercontent.com/80299170/197696355-facf71b4-3fd1-46f7-a3a5-b2f7aee191f5.png)
+
+### ❗️느낀점
+처음부터 열까지 프로젝트를 생성하고 배포까지 다시 한번 배울 수 있어 좋았습니다!
+
+글로만 이해했던 내용들을 구현해보면서 다시 한번 상기시키며 배웠습니다!
+
+요구사항을 분석하고 설계하고 구축하는 과정 안에서 과제를 떠나 스스로 더 많이 배울 수 있어서 좋은 경험이었습니다!
+
+
 
 
