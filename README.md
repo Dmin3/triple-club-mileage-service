@@ -43,3 +43,5 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 - mockk , kluent (Test 라이브러리)
 
 ### ERD
+
+<img src="https://user-images.githubusercontent.com/80299170/197686712-d5c5e29d-dabe-49e1-a824-7a7b89e91c3d.png"  width="800" height="600"/>
