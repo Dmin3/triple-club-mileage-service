@@ -41,3 +41,5 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 - docker-compose
 - Spring REST Docs
 - mockk , kluent (Test 라이브러리)
+
+### ERD
