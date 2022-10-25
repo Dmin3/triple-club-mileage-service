@@ -3,7 +3,7 @@
 :toc: left
 
 == API 문서
-- 개발 : http://localhost:8080/index.html
+- 개발 : http://localhost:8080/docs/index.html
 
 == 리뷰
 === `리뷰 이벤트`
