@@ -11,7 +11,7 @@ import javax.persistence.*
 class Review(
     @Id
     @Column(name = "review_id" ,columnDefinition = "VARBINARY(16)")
-    val id: UUID,
+    val id: UUID = UUID.randomUUID(),
 
     @Column(columnDefinition = "VARBINARY(16)")
     val userId: UUID,
@@ -73,7 +73,6 @@ class Review(
 
 fun forCreateReview(reviewRequest: ReviewRequest) : Review{
     return Review(
-        id = reviewRequest.reviewId,
         userId = reviewRequest.userId,
         placeId = reviewRequest.placeId,
         content = reviewRequest.content

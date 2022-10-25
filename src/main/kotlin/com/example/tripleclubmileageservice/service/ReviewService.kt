@@ -80,7 +80,9 @@ class ReviewServiceImpl(
     }
 
     override fun update(reviewRequest: ReviewRequest): ReviewResponse {
-        val review = findReview(reviewRequest.reviewId)
+        val review = reviewRequest.reviewId?.let { findReview(reviewRequest.reviewId) }
+            ?: throw NotFoundException("no exist Field reviewRequest.reviewId = null")
+
         val userPoint = findUserPoint(reviewRequest.userId)
 
         var point = 0
@@ -128,7 +130,9 @@ class ReviewServiceImpl(
     }
 
     override fun delete(reviewRequest: ReviewRequest) {
-        val review = findReview(reviewRequest.reviewId)
+        val review = reviewRequest.reviewId?.let { findReview(reviewRequest.reviewId) }
+            ?: throw NotFoundException("no exist Field reviewRequest.reviewId = null")
+
         val userPoint = findUserPoint(reviewRequest.userId)
 
         val pointHistories = userPointHistoryRepository.findByReviewIdAndUserId(review.id, userPoint.id)

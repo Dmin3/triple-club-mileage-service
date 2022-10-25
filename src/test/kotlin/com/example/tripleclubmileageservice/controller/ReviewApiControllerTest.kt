@@ -16,6 +16,7 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
+import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import java.util.*
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -57,7 +59,6 @@ internal class ReviewApiControllerTest {
             {
                 "type": "REVIEW",
                 "action": "ADD",
-                "reviewId": "240a0658-dc5f-4878-9381-ebb7b2667772",
                 "content": "GOOD!",
                 "attachedPhotoIds": ["e4d1a64e-a531-46de-88d0-ff0ed70c0bb8", "afb0cef2-851d-4a50-bb07-9cc15cbdc332"],
                 "userId": "3ede0ef2-92b7-4817-a5f3-0c575361f745",
@@ -78,7 +79,7 @@ internal class ReviewApiControllerTest {
                     requestFields(
                         fieldWithPath("type").description("이벤트 타입(${eventTypes})"),
                         fieldWithPath("action").description("리뷰 이벤트 타입(${reviewActions})"),
-                        fieldWithPath("reviewId").description("리뷰 아이디"),
+                        fieldWithPath("reviewId").description("리뷰 아이디(리뷰 수정,삭제 시 필요").type(JsonFieldType.STRING).optional(),
                         fieldWithPath("content").description("리뷰 내용"),
                         fieldWithPath("attachedPhotoIds").description("리뷰에 첨부된 이미지 ID"),
                         fieldWithPath("userId").description("유저 아이디"),
