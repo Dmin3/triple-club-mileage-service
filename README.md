@@ -26,13 +26,14 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 {
 "type": "REVIEW",
 "action": "ADD", 
-"reviewId": "240a0658-dc5f-4878-9381-ebb7b2667772",
-"content": " !",
+"content": "GOOD!",
 "attachedPhotoIds": ["e4d1a64e-a531-46de-88d0-ff0ed70c0bb8", "afb0cef2-851d-4a50-bb07-9cc15cbdc332"],
 "userId": "3ede0ef2-92b7-4817-a5f3-0c575361f745",
 "placeId": "2e4baf1c-5acb-4efb-a1af-eddada31b00f"
 }
 ```
+리뷰 수정 및 삭제 시 `"reviewId" : "{해당 리뷰 아이디}"` 를 Body에 추가해주세요.
+
 ---
 
 ### 사용 기술 스택
@@ -60,5 +61,13 @@ $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 
 ### 테스트 코드
 
+![스크린샷 2022-10-25 오후 2 22 48](https://user-images.githubusercontent.com/80299170/197695402-ee250363-3e23-4b8a-a1b0-982bceeed9aa.png)
+
+- 코틀린을 위한 Mock 프레임워크인 Mockk 프레임워크와 Assertion을 쉽게 도와주는 Kluent 라이브러리를 사용하여 테스트 코드를 작성하였습니다.
+
+### API 명세서
+- 프로젝트 실행 후 http://localhost:8080/docs/index.html 접속하여 명세서를 확인 할 수 있습니다.
+
+![스크린샷 2022-10-25 오후 3 14 14](https://user-images.githubusercontent.com/80299170/197696355-facf71b4-3fd1-46f7-a3a5-b2f7aee191f5.png)
 
 
