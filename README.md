@@ -19,9 +19,11 @@ $ cd build/libs
 $ java -jar triple-club-mileage-service-0.0.1-SNAPSHOT.jar
 ```
 
-`POST http://localhost:8080/events`
+
 
 4. 해당 주소로 데이터가 전송되는지 확인해주세요.
+ `POST http://localhost:8080/events`
+ 
 ```JSON
 {
 "type": "REVIEW",
